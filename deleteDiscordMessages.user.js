@@ -270,7 +270,7 @@ function initUI() {
     popover = createElm(`
     <div id="undiscord" style="display:none;">
         <div class="header">
-            Undiscord - Bulk delete messages
+            Visual - Delete Discord Messages (youtube.com/c/VisualH4X)
         </div>
         <div class="form">
             <div style="display:flex;flex-wrap:wrap;">
