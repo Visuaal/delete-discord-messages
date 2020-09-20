@@ -317,8 +317,8 @@ function initUI() {
             <progress id="progress" style="display:none;"></progress> <span class="percent"></span>
         </div>
         <pre class="logarea">
-            <center>Star this project on <a href="https://github.com/victornpb/deleteDiscordMessages" target="_blank">github.com/victornpb/deleteDiscordMessages</a>!\n\n
-                <a href="https://github.com/victornpb/deleteDiscordMessages/issues" target="_blank">Issues or help</a>
+            <center>Star this project on <a href="https://github.com/Visuaal/delete-discord-messages" target="_blank">github.com/Visuaal/delete-discord-messages</a>!\n\n
+                <a href="https://github.com/Visuaal/delete-discord-messages/issues" target="_blank">Issues or help</a>
             </center>
         </pre>
     </div>
