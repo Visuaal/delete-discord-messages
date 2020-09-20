@@ -1,3 +1,17 @@
+// ==UserScript==
+// @name          Visual - Mass Delete Discord Messages (https://youtube.com/c/VisualH4X)
+// @description   Extends the discord interface so you can mass delete messages from discord
+// @namespace     https://github.com/visuaal/delete-discord-messages
+// @version       1.0
+// @match         https://discord.com/*
+// @downloadURL   https://raw.githubusercontent.com/victornpb/deleteDiscordMessages/master/deleteDiscordMessages.user.js
+// @homepageURL   https://github.com/Visuaal/delete-discord-messages
+// @supportURL    https://github.com/Visuaal/delete-discord-messages/issues
+// @contributionURL https://www.buymeacoffee.com/visual
+// @grant         none
+// @license       MIT
+// ==/UserScript==
+
 /**
  * Delete all messages in a Discord channel or DM
  * @param {string} authToken Your authorization token
@@ -28,7 +42,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
     let throttledTotalTime = 0;
     let offset = 0;
     let iterations = -1;
-    
+
     const wait = async ms => new Promise(done => setTimeout(done, ms));
     const msToHMS = s => `${s / 3.6e6 | 0}h ${(s % 3.6e6) / 6e4 | 0}m ${(s % 6e4) / 1000 | 0}s`;
     const escapeHTML = html => html.replace(/[&<"']/g, m => ({ '&': '&amp;', '<': '&lt;', '"': '&quot;', '\'': '&#039;' })[m]);
@@ -37,7 +51,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
     const ask = async msg => new Promise(resolve => setTimeout(() => resolve(window.confirm(msg)), 10));
     const printDelayStats = () => log.verb(`Delete delay: ${deleteDelay}ms, Search delay: ${searchDelay}ms`, `Last Ping: ${lastPing}ms, Average Ping: ${avgPing|0}ms`);
     const toSnowflake = (date) => /:/.test(date) ? ((new Date(date).getTime() - 1420070400000) * Math.pow(2, 22)) : date;
-        
+
     const log = {
         debug() { extLogger ? extLogger('debug', arguments) : console.debug.apply(console, arguments); },
         info() { extLogger ? extLogger('info', arguments) : console.info.apply(console, arguments); },
@@ -59,7 +73,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
         const headers = {
             'Authorization': authToken
         };
-        
+
         let resp;
         try {
             const s = Date.now();
@@ -102,7 +116,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                 log.warn(`Being rate limited by the API for ${w}ms! Increasing search delay...`);
                 printDelayStats();
                 log.verb(`Cooling down for ${w * 2}ms before retrying...`);
-                
+
                 await wait(w*2);
                 return await recurse();
             } else {
@@ -130,8 +144,8 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
         log.info(`Total messages found: ${data.total_results}`, `(Messages in current page: ${data.messages.length}, To be deleted: ${messagesToDelete.length}, System: ${skippedMessages.length})`, `offset: ${offset}`);
         printDelayStats();
         log.verb(`Estimated time remaining: ${etr}`)
-        
-        
+
+
         if (messagesToDelete.length > 0) {
 
             if (++iterations < 1) {
@@ -141,7 +155,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                         return end(log.error('Aborted by you!'));
                 log.verb(`OK`);
             }
-            
+
             for (let i = 0; i < messagesToDelete.length; i++) {
                 const message = messagesToDelete[i];
                 if (stopHndl && stopHndl()===false) return end(log.error('Stopped by you!'));
@@ -150,7 +164,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                     `Deleting ID:${redact(message.id)} <b>${redact(message.author.username+'#'+message.author.discriminator)} <small>(${redact(new Date(message.timestamp).toLocaleString())})</small>:</b> <i>${redact(message.content).replace(/\n/g,'↵')}</i>`,
                     message.attachments.length ? redact(JSON.stringify(message.attachments)) : '');
                 if (onProgress) onProgress(delCount + 1, grandTotal);
-                
+
                 let resp;
                 try {
                     const s = Date.now();
@@ -186,7 +200,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                         failCount++;
                     }
                 }
-                
+
                 await wait(deleteDelay);
             }
 
@@ -195,7 +209,7 @@ async function deleteMessages(authToken, authorId, guildId, channelId, minId, ma
                 offset += skippedMessages.length;
                 log.verb(`Found ${skippedMessages.length} system messages! Decreasing grandTotal to ${grandTotal} and increasing offset to ${offset}.`);
             }
-            
+
             log.verb(`Searching next messages in ${searchDelay}ms...`, (offset ? `(offset: ${offset})` : '') );
             await wait(searchDelay);
 
@@ -243,7 +257,7 @@ function initUI() {
         #undiscord:not(.redact) .mask{display:none!important}
         #undiscord.redact [priv]{-webkit-text-security:disc!important}
         #undiscord .toolbar span{margin-right:8px}
-        #undiscord button,#undiscord .btn{color:#fff;background:#7289da;border:0;border-radius:4px;font-size:14px}
+        #undiscord button,#undiscord .btn{color:#fff;background:#ff3357;border:0;border-radius:4px;font-size:14px}
         #undiscord button:disabled{display:none}
         #undiscord input[type="text"],#undiscord input[type="search"],#undiscord input[type="password"],#undiscord input[type="datetime-local"]{background-color:#202225;color:#b9bbbe;border-radius:4px;border:0;padding:0 .5em;height:24px;width:144px;margin:2px}
         #undiscord input#file{display:none}
@@ -260,16 +274,11 @@ function initUI() {
         </div>
         <div class="form">
             <div style="display:flex;flex-wrap:wrap;">
-                <span>Authorization <a
-                        href="https://github.com/victornpb/deleteDiscordMessages/blob/master/help/authToken.md" title="Help"
-                        target="_blank">?</a> <button id="getToken">get</button><br>
+                <span>Authorization <button id="getToken">get</button><br>
                     <input type="password" id="authToken" placeholder="Auth Token" autofocus>*<br>
-                    <span>Author <a href="https://github.com/victornpb/deleteDiscordMessages/blob/master/help/authorId.md"
-                            title="Help" target="_blank">?</a> <button id="getAuthor">get</button></span>
+                    <span>Author <button id="getAuthor">get</button></span>
                     <br><input id="authorId" type="text" placeholder="Author ID" priv></span>
-                <span>Guild/Channel <a
-                        href="https://github.com/victornpb/deleteDiscordMessages/blob/master/help/channelId.md" title="Help"
-                        target="_blank">?</a>
+                <span>Guild/Channel
                     <button id="getGuildAndChannel">get</button><br>
                     <input id="guildId" type="text" placeholder="Guild ID" priv><br>
                     <input id="channelId" type="text" placeholder="Channel ID" priv><br>
@@ -277,16 +286,13 @@ function initUI() {
                     <label for="file" title="Import list of channels from messages/index.json file"> Import: <span
                             class="btn">...</span> <input id="file" type="file" accept="application/json,.json"></label>
                 </span><br>
-                <span>Range <a href="https://github.com/victornpb/deleteDiscordMessages/blob/master/help/messageId.md"
-                        title="Help" target="_blank">?</a><br>
+                <span>Range <br>
                     <input id="minDate" type="datetime-local" title="After" style="width:auto;"><br>
                     <input id="maxDate" type="datetime-local" title="Before" style="width:auto;"><br>
                     <input id="minId" type="text" placeholder="After message with Id" priv><br>
                     <input id="maxId" type="text" placeholder="Before message with Id" priv><br>
                 </span>
-                <span>Search messages <a
-                        href="https://github.com/victornpb/deleteDiscordMessages/blob/master/help/filters.md" title="Help"
-                        target="_blank">?</a><br>
+                <span>Search messages <br>
                     <input id="content" type="text" placeholder="Containing text" priv><br>
                     <label><input id="hasLink" type="checkbox">has: link</label><br>
                     <label><input id="hasFile" type="checkbox">has: file</label><br>
@@ -333,7 +339,7 @@ function initUI() {
 
     function mountBtn() {
         const toolbar = document.querySelector('[class^=toolbar]');
-        if (toolbar) toolbar.appendChild(btn); 
+        if (toolbar) toolbar.appendChild(btn);
     }
 
     const observer = new MutationObserver(function (_mutationsList, _observer) {
@@ -348,7 +354,7 @@ function initUI() {
     const startBtn = $('button#start');
     const stopBtn = $('button#stop');
     const autoScroll = $('#autoScroll');
-    
+
     startBtn.onclick = async e => {
         const authToken = $('input#authToken').value.trim();
         const authorId = $('input#authorId').value.trim();
