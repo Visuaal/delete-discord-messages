@@ -1,17 +1,3 @@
-// ==UserScript==
-// @name          Undiscord - Delete all messages in a Discord channel or DM (Bulk deletion)
-// @description   Extends the discord interface so you can mass delete messages from discord
-// @namespace     https://github.com/victornpb/deleteDiscordMessages
-// @version       4.0
-// @match         https://discord.com/*
-// @downloadURL   https://raw.githubusercontent.com/victornpb/deleteDiscordMessages/master/deleteDiscordMessages.user.js
-// @homepageURL   https://github.com/victornpb/deleteDiscordMessages
-// @supportURL    https://github.com/victornpb/deleteDiscordMessages/issues
-// @contributionURL https://www.buymeacoffee.com/vitim
-// @grant         none
-// @license       MIT
-// ==/UserScript==
-
 /**
  * Delete all messages in a Discord channel or DM
  * @param {string} authToken Your authorization token
@@ -252,7 +238,7 @@ function initUI() {
     insertCss(`
         #undicord-btn{position: relative; height: 24px;width: auto;-webkit-box-flex: 0;-ms-flex: 0 0 auto;flex: 0 0 auto;margin: 0 8px;cursor:pointer; color: var(--interactive-normal);}
         #undiscord{position:fixed;top:100px;right:10px;bottom:10px;width:780px;z-index:99;color:var(--text-normal);background-color:var(--background-secondary);box-shadow:var(--elevation-stroke),var(--elevation-high);border-radius:4px;display:flex;flex-direction:column}
-        #undiscord a{color:#00b0f4}
+        #undiscord a{color:#ff3357}
         #undiscord.redact .priv{display:none!important}
         #undiscord:not(.redact) .mask{display:none!important}
         #undiscord.redact [priv]{-webkit-text-security:disc!important}
