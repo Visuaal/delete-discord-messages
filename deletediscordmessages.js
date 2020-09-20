@@ -26,8 +26,8 @@
  * @param {boolean} includeNsfw Search in NSFW channels
  * @param {function(string, Array)} extLogger Function for logging
  * @param {function} stopHndl stopHndl used for stopping
- * @author Victornpb <https://www.github.com/victornpb>
- * @see https://github.com/victornpb/deleteDiscordMessages
+ * @author Visual <https://www.github.com/visuaal>
+ * @see https://github.com/visuaal/delete-discord-messages
  */
 async function deleteMessages(authToken, authorId, guildId, channelId, minId, maxId, content,hasLink, hasFile, includeNsfw, includePinned, extLogger, stopHndl, onProgress) {
     const start = new Date();
