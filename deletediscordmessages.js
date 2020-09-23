@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name          Visual - Mass Delete Discord Messages (https://youtube.com/c/VisualH4X)
 // @description   Extends the discord interface so you can mass delete messages from discord
-// @namespace     https://github.com/visuaal/delete-discord-messages
+// @namespace     https://github.com/VisualH4X/delete-discord-messages
 // @version       1.0
 // @match         https://discord.com/*
-// @downloadURL   https://raw.githubusercontent.com/victornpb/deleteDiscordMessages/master/deleteDiscordMessages.user.js
-// @homepageURL   https://github.com/Visuaal/delete-discord-messages
-// @supportURL    https://github.com/Visuaal/delete-discord-messages/issues
+// @downloadURL   https://raw.githubusercontent.com/VisualH4X/delete-discord-messages/master/deletediscordmessages.js
+// @homepageURL   https://github.com/VisualH4X/delete-discord-messages
+// @supportURL    https://github.com/VisualH4X/delete-discord-messages/issues
 // @contributionURL https://www.buymeacoffee.com/visual
 // @grant         none
 // @license       MIT
@@ -26,7 +26,7 @@
  * @param {boolean} includeNsfw Search in NSFW channels
  * @param {function(string, Array)} extLogger Function for logging
  * @param {function} stopHndl stopHndl used for stopping
- * @author Visual <https://www.github.com/visuaal>
+ * @author Visual <https://www.github.com/VisualH4X>
  * @see https://github.com/visuaal/delete-discord-messages
  */
 async function deleteMessages(authToken, authorId, guildId, channelId, minId, maxId, content,hasLink, hasFile, includeNsfw, includePinned, extLogger, stopHndl, onProgress) {
@@ -309,8 +309,8 @@ function initUI() {
             <progress id="progress" style="display:none;"></progress> <span class="percent"></span>
         </div>
         <pre class="logarea">
-            <center>Star this project on <a href="https://github.com/Visuaal/delete-discord-messages" target="_blank">github.com/Visuaal/delete-discord-messages</a>!\n\n
-                <a href="https://github.com/Visuaal/delete-discord-messages/issues" target="_blank">Issues or help</a>
+            <center>Star this project on <a href="https://github.com/VisualH4X/delete-discord-messages" target="_blank">github.com/VisualH4X/delete-discord-messages</a>!\n\n
+                <a href="https://github.com/VisualH4X/delete-discord-messages/issues" target="_blank">Issues or help</a>
             </center>
         </pre>
     </div>
